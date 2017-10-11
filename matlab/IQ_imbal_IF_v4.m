@@ -22,10 +22,10 @@ RF_freq = 2.440e8;
 %% Choose which sideband the LO downconverts
 
 % For this sideband, output amplitude should be ~1/2
-LO_freq = RF_freq + 2.5e6;
+% LO_freq = RF_freq + 2.5e6;
 
 % For this sideband, output amplitude should be ~0
-%  LO_freq = RF_freq - 2.5e6;
+ LO_freq = RF_freq - 2.5e6;
 
 
 %% Create a complex bandpass FIR filter
@@ -63,7 +63,7 @@ t = t(1:downrate:end);
 
 %% Apply matlab I/Q compensation algorithm
 % https://www.mathworks.com/help/comm/ref/comm.iqimbalancecompensator-system-object.html
-M = 1e-3;
+M = 1/100;
 % x = zeros(1,length(Iout));
 % y = zeros(1,length(Iout));
 % w = zeros(1,length(Iout));

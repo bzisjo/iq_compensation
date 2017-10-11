@@ -22,10 +22,10 @@ RF_freq = 2.440e8;
 %% Choose which sideband the LO downconverts
 
 % For this sideband, output amplitude should be ~1/2
-% LO_freq = RF_freq + 2.5e6;
+LO_freq = RF_freq + 2.5e6;
 
 % For this sideband, output amplitude should be ~0
-LO_freq = RF_freq - 2.5e6;
+% LO_freq = RF_freq - 2.5e6;
 
 
 %% Create a complex bandpass FIR filter
@@ -62,11 +62,11 @@ Qout_un = IFQ_filt(1:downrate:end);
 t = t(1:downrate:end);
 
 %% Quantize
-Iout = round(6.5*Iout_un-0.5);
-Qout = round(6.5*Qout_un-0.5);
+Iout = round(6.5*Iout_un);
+Qout = round(6.5*Qout_un);
 
-%Iout = 6.5*Iout_un-0.5;
-%Qout = 6.5*Qout_un-0.5;
+% Iout = round(6.5*Iout_un-0.5);
+% Qout = round(6.5*Qout_un-0.5);
 
 %% Apply matlab I/Q compensation algorithm
 % https://www.mathworks.com/help/comm/ref/comm.iqimbalancecompensator-system-object.html
@@ -100,9 +100,9 @@ wj = zeros(1,length(Iout));
 % end
 
 for ii = 1:length(Iout)
-    iy(ii) = Iout(ii) + floor(M*wr(ii)*Iout(ii)) + floor(M*wj(ii)*Qout(ii));
-    qy(ii) = Qout(ii) + floor(M*wj(ii)*Iout(ii)) - floor(M*wr(ii)*Qout(ii));
-    if(ii < 1000)
+    iy(ii) = Iout(ii) + (M*(wr(ii)*Iout(ii) + wj(ii)*Qout(ii)));
+    qy(ii) = Qout(ii) + (M*(wj(ii)*Iout(ii) - wr(ii)*Qout(ii)));
+    if(ii < 5000)
         wr(ii+1) = wr(ii) - ((iy(ii) + qy(ii))*(iy(ii)-qy(ii)));
         wj(ii+1) = wj(ii) - ((2*iy(ii)*qy(ii)));
     else
@@ -111,11 +111,11 @@ for ii = 1:length(Iout)
     end
 end
 
-iyout = (iy+0.5)/6.5;
-qyout = (qy+0.5)/6.5;
+iyout = (iy)/6.5;
+qyout = (qy)/6.5;
 
-IFI_filt = iyout;
-IFQ_filt = qyout;
+IFI_filt = iy;
+IFQ_filt = qy;
 %%
 % Filter signal with complex bandpass filter    
 Rcoeff = real(Hbp);
@@ -131,4 +131,4 @@ Qout_final = x3 + x4;
 
 % Plot the Q channel after the IQ compensation and filtering
 figure;plot(Iout_final)
-figure;plot(Qout_final)
+% figure;plot(Qout_final)
