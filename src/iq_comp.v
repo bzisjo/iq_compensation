@@ -1,13 +1,13 @@
 module iq_comp (
 	input clk, RESETn,
-	input freeze_iqcomp,			//Should come from Start Signal FSM
+	input freeze_iqcomp,				//Should come from Start Signal FSM, freezes W values when on
 	input [1:0] op_mode,
 	input [3:0] Ix, Qx,
-	input signed [12:0] Wr_in, Wj_in,
-	output reg signed [3:0] Iy, Qy,
+	input signed [12:0] Wr_in, Wj_in,	//Externally supplied W, used when op_mode = EXT_W
+	output reg signed [3:0] Iy, Qy,		//Rotated and compensated IQ
 
 	//Debugging signals
-	output wire settled,			//Used to tell MCU to store W values
+	output wire settled,				//Used to tell MCU to store W values
 	output reg signed [12:0] Wr, Wj
 );
 
