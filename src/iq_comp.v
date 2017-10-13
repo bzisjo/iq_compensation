@@ -44,7 +44,7 @@ assign Wr_use = (op_mode == INT_W) ? Wr : Wr_in;
 assign Wj_use = (op_mode == INT_W) ? Wj : Wj_in;
 
 //Combinational logic for compensation calculation
-wire signed [18:0] product1;
+/*wire signed [18:0] product1;
 wire signed [18:0] product2;
 wire signed [18:0] product3;
 wire signed [18:0] product4;
@@ -61,22 +61,17 @@ assign product4 = Wr_use * Qx_s;
 assign sum1 = (product1 + product2);
 assign sum2 = (product3 - product4);
 
-/*assign shifted1 = (sum1 < 0) ? ((sum1 > -13'd512) ? 9'd0 : $signed($signed(sum1) >>> M))
-							 : $signed($signed(sum1) >>> M);
-assign shifted2 = (sum2 < 0) ? ((sum2 > -13'd512) ? 9'd0 : $signed($signed(sum2) >>> M))
-							 : $signed($signed(sum2) >>> M);*/
-
 assign shifted1 = $signed($signed(sum1) >>> M);
 assign shifted2 = $signed($signed(sum2) >>> M);
 
 assign I_math = Ix_s + shifted1;
-assign Q_math = Qx_s + shifted2;
+assign Q_math = Qx_s + shifted2;*/
 
-/*assign I_math = Ix_s + $signed(((Wr_use * Ix_s) + (Wj_use * Qx_s))) >>> M;
-assign Q_math = Qx_s + $signed(((Wj_use * Ix_s) - (Wr_use * Qx_s))) >>> M;*/
+assign I_math = Ix_s + $signed($signed(((Wr_use * Ix_s) + (Wj_use * Qx_s))) >>> M);
+assign Q_math = Qx_s + $signed($signed(((Wj_use * Ix_s) - (Wr_use * Qx_s))) >>> M);
 
 //Combinational logic for W update calculation
-wire signed [4:0] IplusQ;
+/*wire signed [4:0] IplusQ;
 wire signed [4:0] IminusQ;
 wire signed [12:0] IQprod1;
 wire signed [12:0] IQprod2;
@@ -87,12 +82,12 @@ assign IQprod1 = IplusQ * IminusQ;
 assign IQprod2 = 2 * Iy * Qy;
 
 assign Wr_math = Wr - IQprod1;
-assign Wj_math = Wj - IQprod2;
+assign Wj_math = Wj - IQprod2;*/
 
 
 
-/*assign Wr_math = $signed(Wr - ((Iy + Qy) * (Iy - Qy)));
-assign Wj_math = $signed(Wj - 2 * Iy * Qy);*/
+assign Wr_math = $signed(Wr - ((Iy + Qy) * (Iy - Qy)));
+assign Wj_math = $signed(Wj - 2 * Iy * Qy);
 
 always @(posedge clk) begin
 	if(~RESETn) begin
