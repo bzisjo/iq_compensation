@@ -33,7 +33,7 @@ wire signed [12:0] Wj_math;
 
 assign settled = freeze_iqcomp;		//Temporary solution
 
-assign M = 4'd9;					//log2(2048) = 11, divide by 2048 -> arithmetic right shift by 11
+assign M = 4'd9;					//log2(512) = 9, divide by 512 -> arithmetic right shift by 9
 
 assign Ix_s = Ix - 4'd8;
 assign Qx_s = Qx - 4'd8;

@@ -22,10 +22,10 @@ RF_freq = 2.440e8;
 %% Choose which sideband the LO downconverts
 
 % For this sideband, output amplitude should be ~1/2
-LO_freq = RF_freq + 2.5e6;
+% LO_freq = RF_freq + 2.5e6;
 
 % For this sideband, output amplitude should be ~0
-% LO_freq = RF_freq - 2.5e6;
+LO_freq = RF_freq - 2.5e6;
 
 
 %% Create a complex bandpass FIR filter
@@ -185,3 +185,24 @@ Qout_final = x3 + x4;
 % Plot the Q channel after the IQ compensation and filtering
 figure;plot(Iout_final)
 % figure;plot(Qout_final)
+
+
+%% Load output from modelsim
+fileID = fopen('i_out_thread.dat','r');
+iy_modelsim = fscanf(fileID,'%x');
+fclose(fileID);
+iy_modelsim = iy_modelsim - 8;
+
+fileID = fopen('q_out_thread.dat','r');
+qy_modelsim = fscanf(fileID,'%x');
+fclose(fileID);
+qy_modelsim = qy_modelsim - 8;
+
+x1_modelsim = conv(iy_modelsim,Rcoeff,'same');
+x2_modelsim = conv(qy_modelsim,Icoeff,'same');
+Iout_modelsim = x1_modelsim - x2_modelsim;
+
+x3_modelsim = conv(iy_modelsim,Icoeff,'same');
+x4_modelsim = conv(qy_modelsim,Rcoeff,'same');
+Qout_modelsim = x3_modelsim + x4_modelsim;
+figure;plot(Iout_modelsim);

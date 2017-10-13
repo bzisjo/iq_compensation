@@ -15,6 +15,7 @@ module iq_comp_testbench();
 	wire signed [3:0] Iy, Qy;
 	wire settled;
 	wire signed [12:0] Wr, Wj;
+	wire [3:0] Iy_uns, Qy_uns;
 
 	reg [3:0] i_thread [0:4999];
 	reg [3:0] q_thread [0:4999];
@@ -25,6 +26,9 @@ module iq_comp_testbench();
 		#(clk_period_half);
 		clk_16MHz = ~clk_16MHz;
 	end // clock_toggle_16MHz
+
+	assign Iy_uns = Iy + 4'd8;
+	assign Qy_uns = Qy + 4'd8;
 
 	iq_comp DUT(
 		.clk          (clk_16MHz),
@@ -67,8 +71,8 @@ module iq_comp_testbench();
 			Qx = q_thread[sample_count];
 			sample_count = sample_count + 1;
 			#(clk_period);
-			i_out_thread[sample_count] = Iy;
-			q_out_thread[sample_count] = Qy;
+			i_out_thread[sample_count] = Iy_uns;
+			q_out_thread[sample_count] = Qy_uns;
 		end // while (sample_count < 5000)
 
 		$writememh("i_out_thread.dat", i_out_thread);
