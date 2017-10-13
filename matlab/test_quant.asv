@@ -103,7 +103,7 @@ fclose(fileID);
 % IFI_filt = real(y);
 % IFQ_filt = imag(y);
 % 
-M = 1/512;
+M = 1/2048;
 iy = zeros(1,length(Iout));
 qy = zeros(1,length(Iout));
 wr = zeros(1,length(Iout));
@@ -132,36 +132,17 @@ IQprod2 = zeros(1,length(Iout));
 
 for ii = 1:length(Iout)
     
-    product1(ii) = wr(ii)*Iout(ii);
-    product2(ii) = wj(ii)*Qout(ii);
-    product3(ii) = wj(ii)*Iout(ii);
-    product4(ii) = wr(ii)*Qout(ii);
-    sum1(ii) = product1(ii) + product2(ii);
-    sum2(ii) = product3(ii) - product4(ii);
-    shifted1(ii) = floor(M*sum1(ii));
-    shifted2(ii) = floor(M*sum2(ii));
+    product1(ii) = w
     
-    iy(ii) = Iout(ii) + shifted1(ii);
-    qy(ii) = Qout(ii) + shifted2(ii);
-    
-    
-%     iy(ii) = Iout(ii) + floor(M*(wr(ii)*Iout(ii) + wj(ii)*Qout(ii)));
-%     qy(ii) = Qout(ii) + floor(M*(wj(ii)*Iout(ii) - wr(ii)*Qout(ii)));
-    
-    IplusQ(ii) = iy(ii) + qy(ii);
-    IminusQ(ii) = iy(ii) - qy(ii);
-    IQprod1(ii) = IplusQ(ii) * IminusQ(ii);
-    IQprod2(ii) = 2 * iy(ii) * qy(ii);
-    
-    wr(ii+1) = wr(ii) - IQprod1(ii);
-    wj(ii+1) = wj(ii) - IQprod2(ii);
-%     if(ii < 5000)
-%         wr(ii+1) = wr(ii) - ((iy(ii) + qy(ii))*(iy(ii)-qy(ii)));
-%         wj(ii+1) = wj(ii) - ((2*iy(ii)*qy(ii)));
-%     else
-%         wr(ii+1) = wr(ii);
-%         wj(ii+1) = wj(ii);
-%     end
+    iy(ii) = Iout(ii) + (M*(wr(ii)*Iout(ii) + wj(ii)*Qout(ii)));
+    qy(ii) = Qout(ii) + (M*(wj(ii)*Iout(ii) - wr(ii)*Qout(ii)));
+    if(ii < 5000)
+        wr(ii+1) = wr(ii) - ((iy(ii) + qy(ii))*(iy(ii)-qy(ii)));
+        wj(ii+1) = wj(ii) - ((2*iy(ii)*qy(ii)));
+    else
+        wr(ii+1) = wr(ii);
+        wj(ii+1) = wj(ii);
+    end
 end
 
 iyout = (iy)/6.5;
