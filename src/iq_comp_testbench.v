@@ -19,8 +19,8 @@ module iq_comp_testbench();
 
 	reg [3:0] i_thread [0:4999];
 	reg [3:0] q_thread [0:4999];
-	reg signed [3:0] i_out_thread [0:4999];
-	reg signed [3:0] q_out_thread [0:4999];
+	reg [3:0] i_out_thread [0:4999];
+	reg [3:0] q_out_thread [0:4999];
 
 	always begin : clock_toggle_16MHz
 		#(clk_period_half);

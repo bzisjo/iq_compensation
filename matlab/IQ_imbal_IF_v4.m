@@ -4,8 +4,8 @@ clc
 
 % Choose how much amplitude and phase mismatch between local oscillator
 % signals
-ampl_mismatch_db = 1;  %[dB]
-IQ_phase_mismatch = 2; %[degrees]
+ampl_mismatch_db = 0;  %[dB]
+IQ_phase_mismatch = 0; %[degrees]
 
 
 %% Some parameters
@@ -21,10 +21,10 @@ RF_freq = 2.440e8;
 
 %% Choose which sideband the LO downconverts
 
-% For this sideband, output amplitude should be ~1/2
+% For this sideband, output amplitude should be ~0 - jon
 % LO_freq = RF_freq + 2.5e6;
 
-% For this sideband, output amplitude should be ~0
+% For this sideband, output amplitude should be ~1/2 - jon
  LO_freq = RF_freq - 2.5e6;
 
 
@@ -93,6 +93,9 @@ end
 
 IFI_filt = iy;
 IFQ_filt = qy;
+
+% IFI_filt = Iout;
+% IFQ_filt = Qout;
 %%
 % Filter signal with complex bandpass filter    
 Rcoeff = real(Hbp);
@@ -107,5 +110,9 @@ x4 = conv(IFQ_filt,Rcoeff,'same');
 Qout = x3 + x4;
 
 % Plot the Q channel after the IQ compensation and filtering
-plot(Iout)
-figure;plot(Qout)
+subplot(211);plot(Iout)
+subplot(212);plot(Qout)
+figure;
+subplot(211);plot(wr);title('wr');
+subplot(212);plot(wj);title('wj');
+

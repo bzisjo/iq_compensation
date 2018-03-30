@@ -1,0 +1,4 @@
+Vivado Simulator 2017.4
+Time resolution is 1 ps
+WARNING: File i_thread.dat referenced on C:/Projects/iq_compensation/src/iq_comp_testbench.v at line 51 cannot be opened for reading. Please ensure that this file is available in the current working directory.
+WARNING: File q_thread.dat referenced on C:/Projects/iq_compensation/src/iq_comp_testbench.v at line 52 cannot be opened for reading. Please ensure that this file is available in the current working directory.

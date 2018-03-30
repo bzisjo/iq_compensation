@@ -1,0 +1,239 @@
+#-----------------------------------------------------------
+# Vivado v2017.4.1 (64-bit)
+# SW Build 2117270 on Tue Jan 30 15:32:00 MST 2018
+# IP Build 2095745 on Tue Jan 30 17:13:15 MST 2018
+# Start of session at: Thu Mar 29 15:51:21 2018
+# Process ID: 17844
+# Current directory: C:/Projects/iq_compensation
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent1272 C:\Projects\iq_compensation\iq_compensation.xpr
+# Log file: C:/Projects/iq_compensation/vivado.log
+# Journal file: C:/Projects/iq_compensation\vivado.jou
+#-----------------------------------------------------------
+Sourcing tcl script 'C:/Users/bzisj/AppData/Roaming/Xilinx/Vivado/Vivado_init.tcl'
+start_gui
+open_project C:/Projects/iq_compensation/iq_compensation.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2017.4/data/ip'.
+WARNING: [BD 41-1661] One or more IPs have been locked in the design 'iq_comp_block.bd'. Please run report_ip_status for more details and recommendations on how to fix this issue.
+List of locked IPs:
+iq_comp_block_clk_wiz_0_1
+iq_comp_block_rst_clk_wiz_0_16M_1
+
+open_project: Time (s): cpu = 00:00:16 ; elapsed = 00:00:08 . Memory (MB): peak = 816.727 ; gain = 97.082
+update_module_reference iq_comp_block_iq_comp_0_1
+INFO: [IP_Flow 19-4753] Inferred signal 'reset' from port 'RESETn' as interface 'RESETn'.
+INFO: [IP_Flow 19-4728] Bus Interface 'RESETn': Added interface parameter 'POLARITY' with value 'ACTIVE_LOW'.
+INFO: [IP_Flow 19-4753] Inferred signal 'clock' from port 'clk' as interface 'clk'.
+INFO: [IP_Flow 19-4728] Bus Interface 'clk': Added interface parameter 'ASSOCIATED_RESET' with value 'RESETn'.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+Adding cell -- xilinx.com:ip:clk_wiz:5.4 - clk_wiz_0
+Adding cell -- xilinx.com:module_ref:iq_comp:1.0 - iq_comp_0
+Adding cell -- xilinx.com:ip:proc_sys_reset:5.0 - rst_clk_wiz_0_16M
+Successfully read diagram <iq_comp_block> from BD file <C:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/iq_comp_block.bd>
+Upgrading 'C:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/iq_comp_block.bd'
+INFO: [IP_Flow 19-3420] Updated iq_comp_block_iq_comp_0_1 to use current project options
+Wrote  : <C:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/iq_comp_block.bd> 
+Wrote  : <C:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/ui/bd_7f4f7ef4.ui> 
+upgrade_ip: Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 915.258 ; gain = 97.551
+update_module_reference: Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 915.258 ; gain = 97.551
+update_compile_order -fileset sources_1
+report_ip_status -name ip_status 
+upgrade_ip [get_ips  {iq_comp_block_rst_clk_wiz_0_16M_1 iq_comp_block_clk_wiz_0_1}] -log ip_upgrade.log
+Upgrading 'C:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/iq_comp_block.bd'
+WARNING: [IP_Flow 19-4050] The normal upgrade process failed due to validation failures in the given configuration. Attempting partial upgrade to set as many user parameters as possible. Please check the parameters whose values were not applied.
+WARNING: [IP_Flow 19-3438] Customization errors found on 'iq_comp_block_clk_wiz_0_1'. Restoring to previous valid configuration.
+WARNING: [IP_Flow 19-1721] During upgrade of 'iq_comp_block_clk_wiz_0_1':
+The upgraded user parameter set contained parameters that could not be mapped on to the upgraded IP. When checking the upgrade script, note that parameter names are case sensitive.
+
+CRITICAL WARNING: [IP_Flow 19-3421] Upgrade of 'iq_comp_block_clk_wiz_0_1' (Clocking Wizard 5.4) from revision 2 to revision 3 has resulted in an incomplete parameterization. Please review the message log, and recustomize this instance before continuing with your design.
+WARNING: [IP_Flow 19-4699] Upgrade has removed interface 'clock_CLK_IN1'
+WARNING: [IP_Flow 19-4699] Upgrade has removed interface 'clock_CLK_OUT1'
+WARNING: [IP_Flow 19-4699] Upgrade has removed interface 'resetn'
+WARNING: [IP_Flow 19-4697] Upgrade has added interface 'reset' (xilinx.com:signal:reset:1.0)
+WARNING: [IP_Flow 19-3670] Detected external interface differences while upgrading 'iq_comp_block_clk_wiz_0_1'.
+WARNING: [IP_Flow 19-4700] Upgrade has removed port 'clk_in1'
+WARNING: [IP_Flow 19-4700] Upgrade has removed port 'clk_out1'
+WARNING: [IP_Flow 19-4700] Upgrade has removed port 'locked'
+WARNING: [IP_Flow 19-4700] Upgrade has removed port 'resetn'
+WARNING: [IP_Flow 19-4698] Upgrade has added port 'reset'
+WARNING: [IP_Flow 19-3298] Detected external port differences while upgrading 'iq_comp_block_clk_wiz_0_1'. These changes may impact your design.
+ERROR: [Common 17-55] 'set_property' expects at least one object.
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+ERROR: [BD 41-1273] Error running post_config_ip TCL procedure: ERROR: [Common 17-55] 'set_property' expects at least one object.
+    ::xilinx.com_ip_clk_wiz_5.4::post_config_ip Line 62
+ERROR: [Common 17-55] 'set_property' expects at least one object.
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+ERROR: [BD 41-1273] Error running post_config_ip TCL procedure: ERROR: [Common 17-55] 'set_property' expects at least one object.
+    ::xilinx.com_ip_clk_wiz_5.4::post_config_ip Line 62
+CRITICAL WARNING: [BD 41-1167] The pin 'resetn' is not found on the upgraded version of the cell '/clk_wiz_0'. Its connection to the net 'reset_1' has been removed.
+CRITICAL WARNING: [BD 41-1167] The pin 'clk_in1' is not found on the upgraded version of the cell '/clk_wiz_0'. Its connection to the net 'sys_clock_1' has been removed.
+CRITICAL WARNING: [BD 41-1167] The pin 'clk_out1' is not found on the upgraded version of the cell '/clk_wiz_0'. Its connection to the net 'clk_wiz_0_clk_out1' has been removed.
+CRITICAL WARNING: [BD 41-1167] The pin 'locked' is not found on the upgraded version of the cell '/clk_wiz_0'. Its connection to the net 'clk_wiz_0_locked' has been removed.
+INFO: [IP_Flow 19-3420] Updated iq_comp_block_rst_clk_wiz_0_16M_1 to use current project options
+CRITICAL WARNING: [Coretcl 2-1279] The upgrade of 'iq_comp_block_clk_wiz_0_1' has identified issues that may require user intervention. Please review the upgrade log 'c:/Projects/iq_compensation/ip_upgrade.log', and verify that the upgraded IP is correctly configured.
+WARNING: [BD 41-597] NET <clk_wiz_0_clk_out1> has no source
+WARNING: [BD 41-597] NET <clk_wiz_0_locked> has no source
+Wrote  : <C:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/iq_comp_block.bd> 
+Wrote  : <C:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/ui/bd_7f4f7ef4.ui> 
+INFO: [Coretcl 2-1525] Wrote upgrade log to 'C:/Projects/iq_compensation/ip_upgrade.log'.
+upgrade_ip: Time (s): cpu = 00:00:10 ; elapsed = 00:00:07 . Memory (MB): peak = 1071.281 ; gain = 155.477
+ERROR: [Common 17-39] 'upgrade_ip' failed due to earlier errors.
+report_ip_status -name ip_status 
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/clk_wiz_0/clk_out1 (100 MHz)" }  [get_bd_pins iq_comp_0/clk]
+ERROR: [BD 41-1273] Error running apply_rule TCL procedure: Expected a clock source to be provided.
+    bd::clkrst::apply_clk_rst_rule Line 33
+INFO: [BD 5-145] Automation rule xilinx.com:bd_rule:clkrst was not applied to object clk
+INFO: [Common 17-17] undo 'apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/clk_wiz_0/clk_out1 (100 MHz)" }  [get_bd_pins iq_comp_0/clk]'
+ERROR: [Common 17-39] 'apply_bd_automation' failed due to earlier errors.
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:board -config {rst_polarity "ACTIVE_LOW" }  [get_bd_pins clk_wiz_0/reset]
+INFO: [board_rule 100-100] create_bd_port -dir I reset_rtl_0 -type rst
+INFO: [board_rule 100-100] set_property CONFIG.POLARITY  /reset_rtl_0
+INFO: [board_rule 100-100] connect_bd_net /reset_rtl_0 /clk_wiz_0/reset
+INFO: [board_rule 100-100] set_property CONFIG.POLARITY ACTIVE_LOW /reset_rtl_0
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/clk_wiz_0/clk_out1 (100 MHz)" }  [get_bd_pins iq_comp_0/clk]
+ERROR: [BD 41-1273] Error running apply_rule TCL procedure: Expected a clock source to be provided.
+    bd::clkrst::apply_clk_rst_rule Line 33
+INFO: [BD 5-145] Automation rule xilinx.com:bd_rule:clkrst was not applied to object clk
+INFO: [Common 17-17] undo 'apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/clk_wiz_0/clk_out1 (100 MHz)" }  [get_bd_pins iq_comp_0/clk]'
+ERROR: [Common 17-39] 'apply_bd_automation' failed due to earlier errors.
+endgroup
+delete_bd_objs [get_bd_nets clk_wiz_0_clk_out1] [get_bd_nets clk_wiz_0_locked] [get_bd_nets rst_clk_wiz_0_16M_peripheral_aresetn] [get_bd_cells rst_clk_wiz_0_16M]
+delete_bd_objs [get_bd_nets reset_rtl_0_1] [get_bd_cells clk_wiz_0]
+delete_bd_objs [get_bd_ports reset_rtl_0]
+delete_bd_objs [get_bd_nets sys_clock_1] [get_bd_ports sys_clock]
+delete_bd_objs [get_bd_nets reset_1] [get_bd_ports reset]
+report_ip_status -name ip_status 
+save_bd_design
+Wrote  : <C:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/iq_comp_block.bd> 
+Wrote  : <C:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/ui/bd_7f4f7ef4.ui> 
+launch_simulation
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [USF-XSim-7] Finding pre-compiled libraries...
+INFO: [USF-XSim-11] File 'C:/Xilinx/Vivado/2017.4/data/xsim/ip/xsim_ip.ini' copied to run dir:'C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-54] Inspecting design source files for 'iq_comp_testbench' in fileset 'sim_1'...
+WARNING: [SIM-utils-52] IP component XML file does not exist: 'c:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/ip/iq_comp_block_clk_wiz_0_1/iq_comp_block_clk_wiz_0_1.xml'
+WARNING: [SIM-utils-52] IP component XML file does not exist: 'c:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/ip/iq_comp_block_rst_clk_wiz_0_16M_1/iq_comp_block_rst_clk_wiz_0_16M_1.xml'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj iq_comp_testbench_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Projects/iq_compensation/src/iq_comp.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module iq_comp
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Projects/iq_compensation/src/iq_comp_testbench.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module iq_comp_testbench
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [USF-XSim-69] 'compile' step finished in '4' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim'
+Vivado Simulator 2017.4
+Copyright 1986-1999, 2001-2016 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2017.4/bin/unwrapped/win64.o/xelab.exe -wto ad901ede0bfb4cc6ab69ae265208974e --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot iq_comp_testbench_behav xil_defaultlib.iq_comp_testbench xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "C:/Projects/iq_compensation/src/iq_comp.v" Line 1. Module iq_comp doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.iq_comp
+Compiling module xil_defaultlib.iq_comp_testbench
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot iq_comp_testbench_behav
+
+****** Webtalk v2017.4.1 (64-bit)
+  **** SW Build 2117270 on Tue Jan 30 15:32:00 MST 2018
+  **** IP Build 2095745 on Tue Jan 30 17:13:15 MST 2018
+    ** Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+
+source C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim/xsim.dir/iq_comp_testbench_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-186] 'C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim/xsim.dir/iq_comp_testbench_behav/webtalk/usage_statistics_ext_xsim.xml' has been successfully sent to Xilinx on Thu Mar 29 15:58:40 2018. For additional details about this file, please refer to the WebTalk help file at C:/Xilinx/Vivado/2017.4/doc/webtalk_introduction.html.
+INFO: [Common 17-206] Exiting Webtalk at Thu Mar 29 15:58:40 2018...
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:08 . Memory (MB): peak = 1100.117 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '8' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "iq_comp_testbench_behav -key {Behavioral:sim_1:Functional:iq_comp_testbench} -tclbatch {iq_comp_testbench.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2017.4
+Time resolution is 1 ps
+source iq_comp_testbench.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+WARNING: File i_thread.dat referenced on C:/Projects/iq_compensation/src/iq_comp_testbench.v at line 51 cannot be opened for reading. Please ensure that this file is available in the current working directory.
+WARNING: File q_thread.dat referenced on C:/Projects/iq_compensation/src/iq_comp_testbench.v at line 52 cannot be opened for reading. Please ensure that this file is available in the current working directory.
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'iq_comp_testbench_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:12 ; elapsed = 00:00:21 . Memory (MB): peak = 1116.801 ; gain = 16.684
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+close_sim: Time (s): cpu = 00:00:01 ; elapsed = 00:00:06 . Memory (MB): peak = 1116.801 ; gain = 0.000
+launch_simulation
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [USF-XSim-7] Finding pre-compiled libraries...
+INFO: [USF-XSim-11] File 'C:/Xilinx/Vivado/2017.4/data/xsim/ip/xsim_ip.ini' copied to run dir:'C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-54] Inspecting design source files for 'iq_comp_testbench' in fileset 'sim_1'...
+WARNING: [SIM-utils-52] IP component XML file does not exist: 'c:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/ip/iq_comp_block_clk_wiz_0_1/iq_comp_block_clk_wiz_0_1.xml'
+WARNING: [SIM-utils-52] IP component XML file does not exist: 'c:/Projects/iq_compensation/iq_compensation.srcs/sources_1/bd/iq_comp_block/ip/iq_comp_block_rst_clk_wiz_0_16M_1/iq_comp_block_rst_clk_wiz_0_16M_1.xml'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj iq_comp_testbench_vlog.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim'
+Vivado Simulator 2017.4
+Copyright 1986-1999, 2001-2016 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2017.4/bin/unwrapped/win64.o/xelab.exe -wto ad901ede0bfb4cc6ab69ae265208974e --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot iq_comp_testbench_behav xil_defaultlib.iq_comp_testbench xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Projects/iq_compensation/iq_compensation.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "iq_comp_testbench_behav -key {Behavioral:sim_1:Functional:iq_comp_testbench} -tclbatch {iq_comp_testbench.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2017.4
+Time resolution is 1 ps
+source iq_comp_testbench.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+WARNING: File i_thread.dat referenced on C:/Projects/iq_compensation/src/iq_comp_testbench.v at line 51 cannot be opened for reading. Please ensure that this file is available in the current working directory.
+WARNING: File q_thread.dat referenced on C:/Projects/iq_compensation/src/iq_comp_testbench.v at line 52 cannot be opened for reading. Please ensure that this file is available in the current working directory.
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'iq_comp_testbench_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 1116.801 ; gain = 0.000
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+exit
+INFO: [Common 17-206] Exiting Vivado at Thu Mar 29 16:01:36 2018...

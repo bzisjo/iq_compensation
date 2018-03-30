@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2017.4.1 (64-bit)
+# SW Build 2117270 on Tue Jan 30 15:32:00 MST 2018
+# IP Build 2095745 on Tue Jan 30 17:13:15 MST 2018
+# Start of session at: Thu Mar 29 15:45:21 2018
+# Process ID: 29856
+# Current directory: C:/Projects/iq_compensation
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent30664 C:\Projects\iq_compensation\iq_compensation.xpr
+# Log file: C:/Projects/iq_compensation/vivado.log
+# Journal file: C:/Projects/iq_compensation\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Projects/iq_compensation/iq_compensation.xpr
+update_compile_order -fileset sources_1
+report_ip_status -name ip_status 

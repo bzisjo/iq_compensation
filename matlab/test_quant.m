@@ -4,8 +4,8 @@ clc
 
 % Choose how much amplitude and phase mismatch between local oscillator
 % signals
-ampl_mismatch_db = 1;  %[dB]
-IQ_phase_mismatch = 2; %[degrees]
+ampl_mismatch_db = 0;  %[dB]
+IQ_phase_mismatch = 0; %[degrees]
 
 
 %% Some parameters
@@ -21,10 +21,10 @@ RF_freq = 2.440e8;
 
 %% Choose which sideband the LO downconverts
 
-% For this sideband, output amplitude should be ~1/2
+% For this sideband, output amplitude should be ~0 -jon
 % LO_freq = RF_freq + 2.5e6;
 
-% For this sideband, output amplitude should be ~0
+% For this sideband, output amplitude should be ~1/2 - jon
 LO_freq = RF_freq - 2.5e6;
 
 
@@ -184,7 +184,7 @@ Qout_final = x3 + x4;
 
 % Plot the Q channel after the IQ compensation and filtering
 figure;plot(Iout_final)
-% figure;plot(Qout_final)
+figure;plot(Qout_final)
 
 
 %% Load output from modelsim
@@ -206,3 +206,42 @@ x3_modelsim = conv(iy_modelsim,Icoeff,'same');
 x4_modelsim = conv(qy_modelsim,Rcoeff,'same');
 Qout_modelsim = x3_modelsim + x4_modelsim;
 figure;plot(Iout_modelsim);
+
+%% Another quant signal
+N = 2^10;
+
+Fs = 2^24;
+dT = 1/Fs;
+t = 0:dT:(N-1)*dT;
+
+% For generating a complex sinusoidal input
+% fin = 2^21;
+% fin = 2981888;
+fin=2e6;
+ini = 0.8*cos(fin*2*pi*t) + 0.001*randn(1,N);
+inq = -0.8*sin(fin*2*pi*t) + 0.001*randn(1,N);
+
+% Need to convert to a digital value to send bits over teensy
+ini(find(ini > 0.875)) = 0.875;
+ini(find(ini < -1)) = -1;
+bins = -1:(2/(2^4)):1; 
+
+% signed
+% bins2 = bins; 
+
+% unsigned
+bins2 = 0:16;
+
+ini_q = bins2(discretize(ini,bins));
+
+inq_q = bins2(discretize(inq,bins));
+I_hex = dec2hex(ini_q);
+Q_hex = dec2hex(inq_q);
+
+fileID = fopen('I_uns.txt','w');
+fprintf(fileID,'%c\n',I_hex);  
+fclose(fileID);
+
+fileID = fopen('Q_uns.txt','w');
+fprintf(fileID,'%c\n',Q_hex);  
+fclose(fileID);

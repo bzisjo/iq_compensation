@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1507935765">
+  <File Type="ROUTE-PWR" Name="iq_comp_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="iq_comp.tcl"/>
+  <File Type="PWROPT-DCP" Name="iq_comp_pwropt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="iq_comp_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="iq_comp_reports.tcl"/>
+  <File Type="BG-DRC" Name="iq_comp.drc"/>
+  <File Type="OPT-HWDEF" Name="iq_comp.hwdef"/>
+  <File Type="OPT-DCP" Name="iq_comp_opt.dcp"/>
+  <File Type="OPT-DRC" Name="iq_comp_drc_opted.rpt"/>
+  <File Type="PLACE-DCP" Name="iq_comp_placed.dcp"/>
+  <File Type="PLACE-IO" Name="iq_comp_io_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="iq_comp_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="iq_comp_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="iq_comp_control_sets_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="iq_comp_incremental_reuse_pre_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="iq_comp_postplace_pwropt.dcp"/>
+  <File Type="PHYSOPT-DCP" Name="iq_comp_physopt.dcp"/>
+  <File Type="BG-BIT" Name="iq_comp.bit"/>
+  <File Type="ROUTE-ERROR-DCP" Name="iq_comp_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="iq_comp_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="iq_comp_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="iq_comp_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="iq_comp_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="iq_comp_drc_routed.rpx"/>
+  <File Type="BITSTR-MSK" Name="iq_comp.msk"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="iq_comp_methodology_drc_routed.rpt"/>
+  <File Type="BG-BGN" Name="iq_comp.bgn"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="iq_comp_methodology_drc_routed.rpx"/>
+  <File Type="BITSTR-RBT" Name="iq_comp.rbt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="iq_comp_methodology_drc_routed.pb"/>
+  <File Type="BG-BIN" Name="iq_comp.bin"/>
+  <File Type="ROUTE-PWR-RPX" Name="iq_comp_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="iq_comp_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="iq_comp_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="iq_comp_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="iq_comp_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="iq_comp_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-CLK" Name="iq_comp_clock_utilization_routed.rpt"/>
+  <File Type="RDI-RDI" Name="iq_comp.vdi"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="iq_comp_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="iq_comp_postroute_physopt_bb.dcp"/>
+  <File Type="BITSTR-NKY" Name="iq_comp.nky"/>
+  <File Type="BITSTR-BMM" Name="iq_comp_bd.bmm"/>
+  <File Type="BITSTR-MMI" Name="iq_comp.mmi"/>
+  <File Type="BITSTR-LTX" Name="iq_comp.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="iq_comp.sysdef"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PPRDIR/src/iq_comp.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="iq_comp"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2017"/>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+</GenRun>
