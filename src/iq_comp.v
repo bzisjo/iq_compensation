@@ -27,13 +27,17 @@ wire [3:0] M;
 //Signals for combinational math
 wire signed [12:0] Wr_use;
 wire signed [12:0] Wj_use;
-wire signed [3:0] I_math;
-wire signed [3:0] Q_math;
+reg signed [3:0] I_math;
+reg signed [3:0] Q_math;
 wire signed [12:0] Wr_math;
 wire signed [12:0] Wj_math;
 
-wire signed [25:0] I_math_intermediate;
-wire signed [25:0] Q_math_intermediate;
+wire signed [25:0] I_math_intermediate1;
+wire signed [25:0] Q_math_intermediate1;
+wire signed [4:0] I_math_intermediate2;
+wire signed [4:0] Q_math_intermediate2;
+wire signed [25:0] Ix_s_shifted;
+wire signed [25:0] Qx_s_shifted;
 
 assign settled = freeze_iqcomp;		//Temporary solution
 
@@ -46,15 +50,39 @@ assign Qx_s = Qx - 4'd8;
 assign Wr_use = (op_mode == INT_W) ? Wr : Wr_in;
 assign Wj_use = (op_mode == INT_W) ? Wj : Wj_in;
 
-assign I_math_intermediate = $signed(Ix_s) <<< M + $signed(((Wr_use * Ix_s) + (Wj_use * Qx_s)));
-assign Q_math_intermediate = $signed(Qx_s) <<< M + $signed(((Wj_use * Ix_s) - (Wr_use * Qx_s)));
+assign Ix_s_shifted = $signed(Ix_s) <<< M;
+assign Qx_s_shifted = $signed(Qx_s) <<< M;
 
-assign I_math = $signed(I_math_intermediate) >>> M;
-assign Q_math = $signed(Q_math_intermediate) >>> M;
+assign I_math_intermediate1 = Ix_s_shifted + $signed(((Wr_use * Ix_s) + (Wj_use * Qx_s)));
+assign Q_math_intermediate1 = Qx_s_shifted + $signed(((Wj_use * Ix_s) - (Wr_use * Qx_s)));
+
+assign I_math_intermediate2 = $signed(I_math_intermediate1) >>> M;
+assign Q_math_intermediate2 = $signed(Q_math_intermediate1) >>> M;
 
 // assign I_math = Ix_s + $signed($signed(((Wr_use * Ix_s) + (Wj_use * Qx_s))) >>> M);
 // assign Q_math = Qx_s + $signed($signed(((Wj_use * Ix_s) - (Wr_use * Qx_s))) >>> M);
 
+always @(*) begin
+	if($signed(I_math_intermediate2) < $signed(0-5'd8)) begin
+		I_math = $signed(-4'd8);
+	end
+	else if($signed(I_math_intermediate2) > $signed(5'd7)) begin
+		I_math = $signed(4'd7);
+	end
+	else begin
+		I_math = $signed(I_math_intermediate2);
+	end
+
+	if($signed(Q_math_intermediate2) < $signed(0-5'd8)) begin
+		Q_math = $signed(-4'd8);
+	end
+	else if($signed(Q_math_intermediate2) > $signed(5'd7)) begin
+		Q_math = $signed(4'd7);
+	end
+	else begin
+		Q_math = $signed(Q_math_intermediate2);
+	end
+end
 
 assign Wr_math = $signed(Wr - ((Iy + Qy) * (Iy - Qy)));
 assign Wj_math = $signed(Wj - 2 * Iy * Qy);
