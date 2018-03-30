@@ -32,6 +32,9 @@ wire signed [3:0] Q_math;
 wire signed [12:0] Wr_math;
 wire signed [12:0] Wj_math;
 
+wire signed [25:0] I_math_intermediate;
+wire signed [25:0] Q_math_intermediate;
+
 assign settled = freeze_iqcomp;		//Temporary solution
 
 assign M = 4'd9;					//log2(512) = 9, divide by 512 -> arithmetic right shift by 9
@@ -43,8 +46,15 @@ assign Qx_s = Qx - 4'd8;
 assign Wr_use = (op_mode == INT_W) ? Wr : Wr_in;
 assign Wj_use = (op_mode == INT_W) ? Wj : Wj_in;
 
-assign I_math = Ix_s + $signed($signed(((Wr_use * Ix_s) + (Wj_use * Qx_s))) >>> M);
-assign Q_math = Qx_s + $signed($signed(((Wj_use * Ix_s) - (Wr_use * Qx_s))) >>> M);
+assign I_math_intermediate = $signed(Ix_s) <<< M + $signed(((Wr_use * Ix_s) + (Wj_use * Qx_s)));
+assign Q_math_intermediate = $signed(Qx_s) <<< M + $signed(((Wj_use * Ix_s) - (Wr_use * Qx_s)));
+
+assign I_math = $signed(I_math_intermediate) >>> M;
+assign Q_math = $signed(Q_math_intermediate) >>> M;
+
+// assign I_math = Ix_s + $signed($signed(((Wr_use * Ix_s) + (Wj_use * Qx_s))) >>> M);
+// assign Q_math = Qx_s + $signed($signed(((Wj_use * Ix_s) - (Wr_use * Qx_s))) >>> M);
+
 
 assign Wr_math = $signed(Wr - ((Iy + Qy) * (Iy - Qy)));
 assign Wj_math = $signed(Wj - 2 * Iy * Qy);
