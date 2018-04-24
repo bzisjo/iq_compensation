@@ -4,8 +4,8 @@ clc
 
 % Choose how much amplitude and phase mismatch between local oscillator
 % signals
-ampl_mismatch_db = 20;  %[dB]
-IQ_phase_mismatch = 40; %[degrees]
+ampl_mismatch_db = 10;  %[dB]
+IQ_phase_mismatch = 50; %[degrees]
 
 %% Some parameters
 Fs2 = 16e6;
@@ -81,6 +81,11 @@ t = t(1:downrate:end);
 % f=Fs2/(2*pi)*w;
 % plot(f, abs(X_shift))
 
+%% Quantize
+Iout_q = round(6.5*Iout);
+Qout_q = round(6.5*Qout);
+Iimage_q = round(6.5*Iimage);
+Qimage_q = round(6.5*Qimage);
 %% Apply matlab I/Q compensation algorithm
 % https://www.mathworks.com/help/comm/ref/comm.iqimbalancecompensator-system-object.html
 M = 1/100;
@@ -144,6 +149,42 @@ end
 Iimage = iyim;
 Qimage = qyim;
 
+%% Apply same algorithm on quantized signal
+M = 1/512;
+iy_q = zeros(1,length(Iout_q));
+qy_q = zeros(1,length(Iout_q));
+wr_q = zeros(1,length(Iout_q));
+wj_q = zeros(1,length(Iout_q));
+
+
+for ii = 1:length(Iout_q)
+    iy_q(ii) = Iout_q(ii) + floor(M*(wr_q(ii)*Iout_q(ii) + wj_q(ii)*Qout_q(ii)));
+    qy_q(ii) = Qout_q(ii) + floor(M*(wj_q(ii)*Iout_q(ii) - wr_q(ii)*Qout_q(ii)));
+
+    wr_q(ii+1) = wr_q(ii) - ((iy_q(ii) + qy_q(ii))*(iy_q(ii)-qy_q(ii)));
+    wj_q(ii+1) = wj_q(ii) - ((2*iy_q(ii)*qy_q(ii)));
+end
+
+Iout_q = iy_q;
+Qout_q = qy_q;
+
+
+iyim_q = zeros(1,length(Iout_q));
+qyim_q = zeros(1,length(Iout_q));
+wrim_q = zeros(1,length(Iout_q));
+wjim_q = zeros(1,length(Iout_q));
+
+
+for ii = 1:length(Iout_q)
+    iyim_q(ii) = Iimage_q(ii) + floor(M*(wrim_q(ii)*Iimage_q(ii) + wjim_q(ii)*Qimage_q(ii)));
+    qyim_q(ii) = Qimage_q(ii) + floor(M*(wjim_q(ii)*Iimage_q(ii) - wrim_q(ii)*Qimage_q(ii)));
+
+    wrim_q(ii+1) = wrim_q(ii) - ((iyim_q(ii) + qyim_q(ii))*(iyim_q(ii)-qyim_q(ii)));
+    wjim_q(ii+1) = wjim_q(ii) - ((2*iyim_q(ii)*qyim_q(ii)));
+end
+
+Iimage_q = iyim_q;
+Qimage_q = qyim_q;
 %%
 % Filter signal with complex bandpass filter    
 Rcoeff = real(Hbp);
@@ -171,6 +212,7 @@ Qimage_rej = x3im - x4im;
 
 
 % Plot the Q channel after the IQ compensation and filtering
+figure;
 subplot(411);plot(Iout_rej);title("Iout")
 subplot(412);plot(Qout);title("Qout")
 
@@ -184,3 +226,45 @@ subplot(414);plot(Qimage_rej);title("Qimage")
 % figure;
 % subplot(211);plot(wrim);title('wr_image');
 % subplot(212);plot(wjim);title('wj_image');
+
+%% Quantized
+% Filter signal with complex bandpass filter    
+Rcoeff = real(Hbp);
+Icoeff = imag(Hbp);
+
+% Actual signal
+x1_q = conv(Iout_q,Rcoeff,'same');
+x2_q = conv(Qout_q,Icoeff,'same');
+
+x3_q = conv(Iout_q,Icoeff,'same');
+x4_q = conv(Qout_q,Rcoeff,'same');
+
+Iout_rej_q = x1_q + x2_q;
+Qout_rej_q = x3_q - x4_q;
+
+% Image signal
+x1im_q = conv(Iimage_q,Rcoeff,'same');
+x2im_q = conv(Qimage_q,Icoeff,'same');
+
+x3im_q = conv(Iimage_q,Icoeff,'same');
+x4im_q = conv(Qimage_q,Rcoeff,'same');
+
+Iimage_rej_q = x1im_q + x2im_q;
+Qimage_rej_q = x3im_q - x4im_q;
+
+
+% Plot the Q channel after the IQ compensation and filtering
+figure;
+subplot(411);plot(Iout_rej_q);title("Iout_q")
+subplot(412);plot(Qout_q);title("Qout_q")
+
+subplot(413);plot(Iimage_rej_q);title("Iimage_q")
+subplot(414);plot(Qimage_rej_q);title("Qimage_q")
+
+% figure;
+% subplot(211);plot(wr_q);title('wr_q');
+% subplot(212);plot(wj_q);title('wj_q');
+% 
+% figure;
+% subplot(211);plot(wrim_q);title('wr_image_q');
+% subplot(212);plot(wjim_q);title('wj_image_q');

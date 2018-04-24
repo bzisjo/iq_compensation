@@ -45,7 +45,7 @@ MSK = RF_ampl * sin(2*pi*RF_freq*t);
 
 %% Create LO with amplitude and phase mismatch
 LOI = LOI_ampl * sin(2*pi*LO_freq*t)+LOI_ampl;
-LOQ = LOQ_ampl * sin(2*pi*LO_freq*t + IQ_phase_mismatch + 90*pi/180)+LOQ_ampl;
+LOQ = LOQ_ampl * sin(2*pi*LO_freq*t + IQ_phase_mismatch*pi/180 + 90*pi/180)+LOQ_ampl;
 
 %% Downconvert with LO
 IFI = LOI .* MSK;
